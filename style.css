@@ -1,0 +1,298 @@
+/**
+ * Sumesh K S - Web Developer Portfolio
+ * Dedicated Stylesheet: Design Tokens, Typography, Layout & Animations
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+/* ==========================================================================
+   CSS CUSTOM PROPERTIES / DESIGN SYSTEM TOKENS
+   ========================================================================== */
+:root {
+  /* Brand & Accent Colors */
+  --color-primary: #c0c1ff;
+  --color-primary-container: #8083ff;
+  --color-on-primary: #1000a9;
+  --color-on-primary-container: #0d0096;
+  --color-primary-fixed: #e1e0ff;
+  --color-primary-fixed-dim: #c0c1ff;
+  --color-on-primary-fixed: #07006c;
+  --color-on-primary-fixed-variant: #2f2ebe;
+  --color-inverse-primary: #494bd6;
+
+  --color-secondary: #7bd0ff;
+  --color-secondary-container: #00a6e0;
+  --color-on-secondary: #00354a;
+  --color-on-secondary-container: #00374d;
+  --color-secondary-fixed: #c4e7ff;
+  --color-secondary-fixed-dim: #7bd0ff;
+  --color-on-secondary-fixed: #001e2c;
+  --color-on-secondary-fixed-variant: #004c69;
+
+  --color-tertiary: #6fd5e6;
+  --color-tertiary-container: #2d9eae;
+  --color-on-tertiary: #00363d;
+  --color-on-tertiary-container: #002f35;
+  --color-tertiary-fixed: #9bf0ff;
+  --color-tertiary-fixed-dim: #6fd5e6;
+  --color-on-tertiary-fixed: #001f24;
+  --color-on-tertiary-fixed-variant: #004f58;
+
+  /* Surfaces & Backgrounds */
+  --color-background: #0f131d;
+  --color-surface: #0f131d;
+  --color-surface-dim: #0f131d;
+  --color-surface-bright: #353944;
+  --color-surface-charcoal: #111827;
+  --color-surface-container-lowest: #0a0e18;
+  --color-surface-container-low: #171b26;
+  --color-surface-container: #1c1f2a;
+  --color-surface-container-high: #262a35;
+  --color-surface-container-highest: #313540;
+  --color-surface-variant: #313540;
+  --color-surface-glass: rgba(17, 24, 39, 0.75);
+
+  /* Typography Colors */
+  --color-on-background: #dfe2f1;
+  --color-on-surface: #dfe2f1;
+  --color-on-surface-variant: #c7c4d7;
+  --color-inverse-surface: #dfe2f1;
+  --color-inverse-on-surface: #2c303b;
+  --color-outline: #908fa0;
+  --color-outline-variant: #464554;
+
+  /* Status Colors */
+  --color-error: #ffb4ab;
+  --color-error-container: #93000a;
+  --color-on-error: #690005;
+  --color-on-error-container: #ffdad6;
+
+  /* Glows & Borders */
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-border-active: rgba(56, 189, 248, 0.35);
+  --glow-cyan: rgba(56, 189, 248, 0.20);
+  --glow-indigo: rgba(99, 102, 241, 0.15);
+
+  /* Font Families */
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Spacings */
+  --spacing-space-xs: 0.25rem;
+  --spacing-space-sm: 0.5rem;
+  --spacing-space-md: 1rem;
+  --spacing-space-lg: 1.5rem;
+  --spacing-space-xl: 2.5rem;
+  --spacing-margin: 4rem;
+}
+
+/* ==========================================================================
+   GLOBAL BASE RESETS & SCROLL BEHAVIOR
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+  font-family: var(--font-body);
+  overscroll-behavior: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--color-secondary);
+  color: var(--color-on-secondary);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-container-high);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-surface-bright);
+}
+
+/* ==========================================================================
+   SCROLL PROGRESS BAR & FLOATING RETURN BUTTON
+   ========================================================================== */
+#scroll-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 3.5px;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: height 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
+}
+
+#scroll-progress-container:hover {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+#scroll-progress-bar {
+  height: 100%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: 0% 50%;
+  background: linear-gradient(90deg, #8083ff 0%, #7bd0ff 50%, #6fd5e6 100%);
+  box-shadow: 0 0 10px rgba(111, 213, 230, 0.8), 0 0 20px rgba(128, 131, 255, 0.5);
+  transition: transform 0.08s ease-out;
+  will-change: transform;
+}
+
+#scroll-to-top-btn {
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   INTERACTIVE SKILL BARS
+   ========================================================================== */
+.skill-progress-bar {
+  width: 0%;
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   TYPOGRAPHY HELPER CLASSES
+   ========================================================================== */
+.font-display-hero {
+  font-family: var(--font-body);
+  font-size: 56px;
+  line-height: 64px;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+}
+
+.font-headline-lg {
+  font-family: var(--font-body);
+  font-size: 36px;
+  line-height: 44px;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.font-headline-md {
+  font-family: var(--font-body);
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: -0.015em;
+  font-weight: 600;
+}
+
+.font-headline-sm {
+  font-family: var(--font-body);
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+.font-body-lg {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: -0.005em;
+  font-weight: 400;
+}
+
+.font-body-md {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.font-body-sm {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.font-label-caps {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.font-label-code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .font-display-hero {
+    font-size: 36px;
+    line-height: 44px;
+    letter-spacing: -0.025em;
+  }
+  .font-headline-lg {
+    font-size: 28px;
+    line-height: 36px;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* ==========================================================================
+   GLASSMORPHISM & GLOW HELPERS
+   ========================================================================== */
+.bg-surface-glass {
+  background-color: var(--color-surface-glass);
+}
+
+.border-border-subtle {
+  border-color: var(--color-border-subtle);
+}
+
+.border-border-active {
+  border-color: var(--color-border-active);
+}
+
+/* ==========================================================================
+   PRINT STYLES
+   ========================================================================== */
+@media print {
+  #scroll-progress-container,
+  #scroll-to-top-btn,
+  #mobile-menu-toggle,
+  #toast-container {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+}
